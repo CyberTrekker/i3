@@ -1,0 +1,36 @@
+backend = "glx";
+glx-no-stencil = true;
+vsync = "opengl-swc";
+ 
+# Fading
+fading = true;                  # Fade windows during opacity changes.
+fade-delta = 12;                # The time between steps in a fade in milliseconds. (default 10).
+fade-in-step = 0.15;            # Opacity change between steps while fading in. (default 0.028).
+fade-out-step = 0.15;           # Opacity change between steps while fading out. (default 0.03).
+no-fading-openclose = false;    # Fade windows in/out when opening/closing.
+ 
+# Shadow
+shadow = true;
+shadow-radius = 5;
+shadow-offset-x = -5;
+shadow-offset-y = -5;
+shadow-opacity = 0.55;
+shadow-exclude = [
+    "! name~=''",
+    "class_g = 'Firefox' && argb",
+    "_GTK_FRAME_EXTENTS@:c",
+    "_NET_WM_STATE@:32a *= '_NET_WM_STATE_HIDDEN'"
+];
+ 
+# Opacity
+mark-ovredir-focused = true;
+inactive-opacity = 0.85;
+ 
+# Excludes
+focus-exclude = [ "class_g = 'firefox'" ];
+ 
+# Window type settings
+wintypes:
+{
+  tooltip = { fade = true; shadow = true; opacity = 0.85; focus = true; };
+};
