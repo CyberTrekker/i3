@@ -372,7 +372,7 @@ exec --no-startup-id hp-systray
 # pidgin: A Gtk+ based multiprotocol instant messaging client in systray
 exec --no-startup-id pidgin
 
-# dropbox: Dropbox cloud applet in systray
+# dropbox: Dropbox Start daemon
 exec --no-startup-id dropbox start
 
 # keepassxc: Cross-platform password manager applet in systray
