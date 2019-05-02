@@ -62,8 +62,7 @@ bindsym $mod+q [instance="dropdown"] scratchpad show
 ##############
 # Lockscreen #
 ##############
-exec_always --no-startup-id xautolock -time 5  -locker "i3lock -c 000000  && sleep 1"-killtime 10 -killer "systemctl suspend"  -detectsleep
-exec --no-startup-id xautolock -time 10 -locker i3lock
+exec_always --no-startup-id xautolock -time 10 -locker i3lock
 
 ########## Keybindings ##########
 bindsym mod4+shift+s exec i3lock -c 000000 # Easier locking
