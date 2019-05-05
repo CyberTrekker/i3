@@ -353,7 +353,7 @@ exec --no-startup-id sh /home/cybertrekker/.fehbg
 exec --no-startup-id blueman-applet
 
 # compton: Compositor
-exec --no-startup-id compton
+exec_always --no-startup-id compton
 
 # conky: System monitor for X 
 exec --no-startup-id conky
