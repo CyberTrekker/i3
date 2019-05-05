@@ -18,7 +18,6 @@
 ###############
 # Set Mod Key #
 ###############
-
 set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -45,7 +44,6 @@ bindsym $mod+Shift+q kill
 ############
 # Terminal #
 ############
-
 # start a terminal
 bindsym $mod+Return exec st
 
@@ -129,7 +127,6 @@ bindsym $mod+a focus parent
 ##############
 # Scratchpad #
 ##############
-
 # Make the currently focused window a scratchpad
 bindsym $mod+Shift+minus move scratchpad
 
@@ -152,7 +149,6 @@ set_from_resource $black i3wm.color0 #000000
 ##############
 # Workspaces #
 ##############
-
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1: Internet "
@@ -193,7 +189,6 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 ########################
 # Control Key Mappings #
 ########################
-
 # PulseAudio (volume) controls
 bindsym XF86AudioRaiseVolume exec "amixer -D pulse set Master 5%+ unmute"
 bindsym XF86AudioLowerVolume exec "amixer -D pulse set Master 5%- unmute"
@@ -216,7 +211,6 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 #######################################################
 # Set Power (shut down, restart and locking features) #
 #######################################################
-
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
     bindsym l exec --no-startup-id i3exit lock, mode "default"
@@ -235,13 +229,11 @@ bindsym $mod+Pause mode "$mode_system"
 ###################
 # Network Restart #
 ##################
-
 set $netrefresh --no-startup-id sudo -A systemctl restart NetworkManager
 
 ########################
 # Window Configuration #
 ########################
-
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -275,7 +267,6 @@ show_marks yes
 #########
 # i3bar #
 #########
-
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
@@ -286,7 +277,6 @@ bar {
 #################
 # Mode Launcher #
 #################
-
 # Press $mod+o followed by either f, t, Escape or Return to launch firefox,
 # thunderbird or return to the default mode, respectively.
 set $mode_launcher Launch: [f]irefox [t]hunderbird
@@ -303,7 +293,6 @@ mode "$mode_launcher" {
 ##########################
 # Application Management #
 ##########################
-
 # Open applications on specific workspaces
 assign [class="Thunderbird"] $ws1
 assign [class="Firefox"] $ws1
@@ -341,7 +330,6 @@ for_window [class="Xfburn"] floating enable
 #########################
 # Start-up Applications #
 #########################
-
 # nm-applet: Network management applet in systray
 exec --no-startup-id nm-applet
 
@@ -379,5 +367,3 @@ exec --no-startup-id keepassxc
 
 # keybase: Encrypted social media chat in systray
 exec --no-startup-id run_keybase
-
-
