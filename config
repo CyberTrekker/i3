@@ -4,7 +4,8 @@
 # | |     | |    cyber.trekker@protonmail.com
 # | |__   | |
 # |____|  |_|	 ¯\_(ツ)_/¯ 
-#       Maintained by Cyber Trekker
+# Maintained by Cyber Trekker
+# 03-2019 ver 7.01
 ##############################################
 # A customized config for i3wm (http://www.i3wm.org) 
 # This config file will not be overwritten, so edit it to your personal need and preference.
@@ -63,7 +64,8 @@ bindsym $mod+q [instance="dropdown"] scratchpad show
 exec_always --no-startup-id xautolock -time 10 -locker i3lock
 
 ########## Keybindings ##########
-bindsym mod4+shift+s exec i3lock -c 000000 # Easier locking
+# Easier locking
+bindsym mod4+shift+s exec i3lock -c 000000 
 
 ####################################
 # Start dmenu (a program launcher) #
@@ -228,7 +230,7 @@ bindsym $mod+Pause mode "$mode_system"
 
 ###################
 # Network Restart #
-##################
+###################
 set $netrefresh --no-startup-id sudo -A systemctl restart NetworkManager
 
 ########################
@@ -272,6 +274,7 @@ show_marks yes
 bar {
         status_command i3status
     separator_symbol ":|:"
+    font pango:Awesome 10
 }
 
 #################
@@ -297,7 +300,6 @@ mode "$mode_launcher" {
 assign [class="Thunderbird"] $ws1
 assign [class="Firefox"] $ws1
 assign [class="Telegram"] $ws1
-assign [class="Orion"] $ws1
 assign [class="Hexchat"] $ws1
 assign [class="LibreOffice"] $ws2
 assign [class="Xed"] $ws2
