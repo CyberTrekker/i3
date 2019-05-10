@@ -5,7 +5,7 @@
 # | |__   | |
 # |____|  |_|	 ¯\_(ツ)_/¯ 
 # Maintained by Cyber Trekker
-# 03-2019 > 05-2019 ver 4.02
+# 03-2019 > 05-2019 ver 4.03
  ##############################################
 # A customized config for i3wm (http://www.i3wm.org) 
 # This config file will not be overwritten, so edit it to your personal need and preference.
@@ -61,7 +61,7 @@ bindsym $mod+q [instance="dropdown"] scratchpad show
 ##############
 # Lockscreen #
 ##############
-exec_always --no-startup-id xautolock -time 10 -locker i3lock
+exec --no-startup-id xautolock -time 10 -locker i3lock
 
 ########## Keybindings ##########
 # Easier locking
@@ -153,7 +153,6 @@ set_from_resource $black i3wm.color0 #000000
 ##############
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-Workspaces 
 set $ws1 "1: Internet "
 set $ws2 "2: Office "
 set $ws3 "3: Multimedia "
