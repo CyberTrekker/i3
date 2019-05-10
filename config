@@ -302,14 +302,14 @@ assign [class="Thunderbird"] $ws1
 assign [class="Firefox"] $ws1
 assign [class="Telegram"] $ws1
 assign [class="Hexchat"] $ws1
-assign [class="LibreOffice"] $ws2
+assign [class="libreoffice"] $ws2
 assign [class="Xed"] $ws2
 assign [class="Nautilus"] $ws2
 assign [class="Shutter"] $ws2
 assign [class="Gradio"] $ws3
 assign [class="Tilix"] $ws4
 assign [class="Seahorse"] $ws4
-assign [class="ClamTK"] $ws4
+assign [class="Clamtk"] $ws4
 assign [class="Gnome-mahjongg"] $ws5
 assign [class="Notejot"] $ws7
 
