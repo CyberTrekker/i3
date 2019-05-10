@@ -153,16 +153,14 @@ set_from_resource $black i3wm.color0 #000000
 ##############
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1: Internet "
-set $ws2 "2: Office "
-set $ws3 "3: Multimedia "
-set $ws4 "4: ConfigSec "
-set $ws5 "5: Game "
-set $ws6 "6: Science "
-set $ws7 "7: Note "
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
+Workspaces 
+set $ws1 "1: Internet "
+set $ws2 "2: Office "
+set $ws3 "3: Multimedia "
+set $ws4 "4: ConfigSec "
+set $ws5 "5: Game "
+set $ws6 "6: Science "
+set $ws7 "7: Note "
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
