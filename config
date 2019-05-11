@@ -155,7 +155,7 @@ set_from_resource $black i3wm.color0 #000000
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1: Internet  "
 set $ws2 "2: Office  "
-set $ws3 "3: Multimedia "
+set $ws3 "3: Multimedia  "
 set $ws4 "4: ConfigSec   "
 set $ws5 "5: Game  "
 set $ws6 "6: Science "
@@ -330,9 +330,9 @@ for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="(?i)virtualbox"] fullscreen enable 
 for_window [class="Xfburn"] floating enable
 
-##############################
-# Application Icon on Window #
-##############################
+############################
+# Icon on Window Title Bar #
+############################
 for_window [class="(?i)firefox"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
 for_window [class="(?i)thunderbird"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
 for_window [class="(?i)telegram"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
@@ -344,12 +344,14 @@ for_window [class="(?i)gradio"] title_format "<tt></tt><span foreground='#FF6611
 for_window [class="(?i)terminal"] title_format "<tt></tt><span foreground='#FF6611'>  </span><tt> </tt>%title"
 for_window [class="(?i)tilix"] title_format "<tt></tt><span foreground='#FF6611'>  </span><tt> </tt>%title"
 for_window [class="(?i)st"] title_format "<tt></tt><span foreground='#FF6611'>  </span><tt> </tt>%title"
+for_window [class="(?i)seahorse"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
 for_window [class="(?i)nautilus"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
 for_window [class="(?i)xed"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
 for_window [class="(?i)com.github.lainsce.notejot"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
 for_window [class="(?i)libreoffice"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
 for_window [class="(?i)gnome-mahjongg"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
 for_window [class="(?i)steam"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
+for_window [title="Virtual Machine Manager"] title_format "<tt></tt><span foreground='#AAAAFF' >   </span><tt> </tt>%title"
 
 #########################
 # Start-up Applications #
