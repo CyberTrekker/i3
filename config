@@ -7,6 +7,7 @@
 # Maintained by Cyber Trekker
 # 03-2019 > 05-2019 ver 4.04
  ##############################################
+
 # A customized config for i3wm (http://www.i3wm.org) 
 # This config file will not be overwritten, so edit it to your personal need and preference.
 #
@@ -153,9 +154,9 @@ set_from_resource $black i3wm.color0 #000000
 ##############
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1: Internet  "
+set $ws1 "1: Internet   "
 set $ws2 "2: Office  "
-set $ws3 "3: Multimedia  "
+set $ws3 "3: Multimedia  "
 set $ws4 "4: ConfigSec   "
 set $ws5 "5: Game  "
 set $ws6 "6: Science "
