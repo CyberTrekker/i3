@@ -154,9 +154,9 @@ set_from_resource $black i3wm.color0 #000000
 ##############
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1: Internet   "
+set $ws1 "1: Internet  "
 set $ws2 "2: Office  "
-set $ws3 "3: Multimedia  "
+set $ws3 "3: Multimedia  "
 set $ws4 "4: ConfigSec   "
 set $ws5 "5: Game  "
 set $ws6 "6: Science "
@@ -266,6 +266,10 @@ bindsym $mod+r mode "resize"
 
 # drawing marks on window decoration
 show_marks yes
+
+# floating window specification
+floating_minimum_size 75 x 50
+floating_maximum_size 640 x 480
 
 #########
 # i3bar #
