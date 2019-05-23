@@ -154,9 +154,9 @@ set_from_resource $black i3wm.color0 #000000
 ##############
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1: Internet  "
+set $ws1 "1: Internet   "
 set $ws2 "2: Office  "
-set $ws3 "3: Multimedia  "
+set $ws3 "3: Multimedia  "
 set $ws4 "4: ConfigSec   "
 set $ws5 "5: Game  "
 set $ws6 "6: Science "
@@ -386,6 +386,9 @@ exec --no-startup-id volumeicon
 
 # hp-systray: HP systray applet in systray
 exec --no-startup-id hp-systray
+
+# Synapse: Launcher
+exec --no-startup-id synapse
 
 # pidgin: A Gtk+ based multiprotocol instant messaging client in systray
 exec --no-startup-id pidgin
