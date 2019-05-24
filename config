@@ -5,7 +5,7 @@
 # | |__   | |
 # |____|  |_|	 ¯\_(ツ)_/¯ 
 # Maintained by Cyber Trekker
-# 03-2019 > 05-2019 ver 4.05
+# 03-2019 > 05-2019 ver 4.06
  ##############################################
 
 # A customized config for i3wm (http://www.i3wm.org) 
@@ -62,7 +62,9 @@ bindsym $mod+q [instance="dropdown"] scratchpad show
 ##############
 # Lockscreen #
 ##############
+# exec-always --no-startup-id xautolock -time 10 -locker i3lock
 exec --no-startup-id xautolock -time 10 -locker i3lock -c 000000
+
 
 ########## Keybindings ##########
 # Easier locking
