@@ -5,7 +5,7 @@
 # | |__   | |
 # |____|  |_|	 ¯\_(ツ)_/¯ 
 # Maintained by Cyber Trekker
-# 03-2019 > 05-2019 ver 4.06
+# 03-2019 > 05-2019 ver 4.07
  ##############################################
 
 # A customized config for i3wm (http://www.i3wm.org) 
@@ -311,6 +311,7 @@ assign [class="Telegram"] $ws1
 assign [class="Hexchat"] $ws1
 assign [class="libreoffice"] $ws2
 assign [class="Xed"] $ws2
+assign [class="qalculate"] $ws2
 assign [class="Nautilus"] $ws2
 assign [class="Shutter"] $ws2
 assign [class="Gradio"] $ws3
@@ -359,6 +360,7 @@ for_window [class="(?i)libreoffice"] title_format "<tt></tt><span foreground='#F
 for_window [class="(?i)gnome-mahjongg"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
 for_window [class="(?i)steam"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
 for_window [title="Virtual Machine Manager"] title_format "<tt></tt><span foreground='#AAAAFF' >   </span><tt> </tt>%title"
+for_window [class="(?i)qalcalculate"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
 
 #########################
 # Start-up Applications #
