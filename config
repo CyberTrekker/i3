@@ -5,7 +5,7 @@
 # | |__   | |
 # |____|  |_|	 ¯\_(ツ)_/¯ 
 # Maintained by Cyber Trekker
-# 03-2019 > 05-2019 ver 4.07
+# 03-2019 > 05-2019 ver 4.08
  ##############################################
 
 # A customized config for i3wm (http://www.i3wm.org) 
@@ -62,9 +62,7 @@ bindsym $mod+q [instance="dropdown"] scratchpad show
 ##############
 # Lockscreen #
 ##############
-# exec-always --no-startup-id xautolock -time 10 -locker i3lock
-exec --no-startup-id xautolock -time 10 -locker i3lock -c 000000
-
+exec-always --no-startup-id xautolock -time 10 -locker i3lock
 
 ########## Keybindings ##########
 # Easier locking
@@ -360,6 +358,7 @@ for_window [class="(?i)libreoffice"] title_format "<tt></tt><span foreground='#F
 for_window [class="(?i)gnome-mahjongg"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
 for_window [class="(?i)steam"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
 for_window [title="Virtual Machine Manager"] title_format "<tt></tt><span foreground='#AAAAFF' >   </span><tt> </tt>%title"
+for_window [class="(?i)qpdfview"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
 for_window [class="(?i)qalcalculate"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
 
 #########################
