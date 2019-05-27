@@ -62,7 +62,7 @@ bindsym $mod+q [instance="dropdown"] scratchpad show
 ##############
 # Lockscreen #
 ##############
-exec-always --no-startup-id xautolock -time 10 -locker i3lock
+exec-always --no-startup-id xautolock -corners --00 -time 10 -locker i3lock -notify 5
 
 ########## Keybindings ##########
 # Easier locking
