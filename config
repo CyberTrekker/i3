@@ -5,7 +5,7 @@
 # | |__   | |
 # |____|  |_|	 ¯\_(ツ)_/¯ 
 # Maintained by Cyber Trekker
-# 03-2019 > 05-2019 ver 4.08
+# 03-2019 > 05-2019 ver 4.09
  ##############################################
 
 # A customized config for i3wm (http://www.i3wm.org) 
@@ -62,7 +62,7 @@ bindsym $mod+q [instance="dropdown"] scratchpad show
 ##############
 # Lockscreen #
 ##############
-exec-always --no-startup-id xautolock -corners --00 -time 10 -locker i3lock -notify 5
+exec --no-startup-id xautolock -time 10 -locker i3lock
 
 ########## Keybindings ##########
 # Easier locking
@@ -189,6 +189,11 @@ bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
 
+# workspace back and forth (with/without active container)
+workspace_auto_back_and_forth yes
+bindsym $mod+b workspace back_and_forth
+bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
+
 ########################
 # Control Key Mappings #
 ########################
@@ -201,6 +206,8 @@ bindsym XF86AudioMute exec "amixer -D pulse set Master toggle"
 bindsym XF86AudioPlay exec "playerctl play-pause"
 bindsym XF86AudioNext exec "playerctl next"
 bindsym XF86AudioPrev exec "playerctl previous"
+
+bindsym $mod+Ctrl+m exec pavucontrol
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -307,24 +314,32 @@ assign [class="Thunderbird"] $ws1
 assign [class="Firefox"] $ws1
 assign [class="Telegram"] $ws1
 assign [class="Hexchat"] $ws1
+assign [class="Skype"] $ws1
 assign [class="libreoffice"] $ws2
 assign [class="Xed"] $ws2
-assign [class="qalculate"] $ws2
+assign [class="Qalculate"] $ws2
+assign [class="Qpdfview"] $ws2
 assign [class="Nautilus"] $ws2
 assign [class="Shutter"] $ws2
 assign [class="Gradio"] $ws3
+assign [class="Pinta"] $ws3
+assign [class="Xfburn"] $ws3
 assign [class="Tilix"] $ws4
 assign [class="Seahorse"] $ws4
 assign [class="Clamtk"] $ws4
+assign [class="Bleachbit"] $ws4
 assign [class="Gnome-mahjongg"] $ws5
 assign [class="Notejot"] $ws7
 
 # Open specific applications in floating mode
+for_window [class="qalculate-gtk"] floating enable border pixel 1
+for_window [class="xclip"] floating enable
 for_window [title="File Transfer*"] floating enable
 for_window [class="Notejot"] floating enable border normal
 for_window [class="GParted"] floating enable border normal
 for_window [title="i3_help"] floating enable sticky enable border normal
 for_window [class="Lightdm-gtk-greeter-settings"] floating enable
+for_window [class="Lightdm-settings"] floating enable
 for_window [class="Lxappearance"] floating enable sticky enable border normal
 for_window [class="Feh"] floating enable border normal
 for_window [class="Pavucontrol"] floating enable
@@ -335,6 +350,9 @@ for_window [class="(?i)System-config-printer.py"] floating enable border normal
 for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="(?i)virtualbox"] fullscreen enable 
 for_window [class="Xfburn"] floating enable
+for_window [class="Bleachbit"] floating enable
+for_window [class="TelegramDesktop"] floating enable
+for_window [class="Skype"] floating enable border normal
 
 ############################
 # Icon on Window Title Bar #
@@ -404,3 +422,7 @@ exec --no-startup-id keepassxc
 
 # keybase: Encrypted social media chat in systray
 exec --no-startup-id run_keybase
+
+# xkill
+bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
+
