@@ -5,7 +5,7 @@
 # | |__   | |
 # |____|  |_|	 ¯\_(ツ)_/¯ 
 # Maintained by Cyber Trekker
-# 03-2019 > 06-2019 ver 4.11
+# 03-2019 > 06-2019 ver 4.12
  ##############################################
 
 # A customized config for i3wm (http://www.i3wm.org) 
@@ -62,7 +62,7 @@ bindsym $mod+q [instance="dropdown"] scratchpad show
 ##############
 # Lockscreen #
 ##############
-exec --no-startup-id xautolock -time 10 -locker i3lock
+exec --no-startup-id xautolock -u -e -i -time 10 -locker i3lock
 
 ########## Keybindings ##########
 # Easier locking
@@ -166,8 +166,8 @@ set $ws3 "3: Multimedia  "
 set $ws4 "4: ConfigSec   "
 set $ws5 "5: Game  "
 set $ws6 "6: Science "
-set $ws7 "7: Note  "
-set $ws8 "8"
+set $ws7 "7: Scratchpad1  "
+set $ws8 "8: Scratchpad2 "
 set $ws9 "9"
 set $ws10 "10"
 
@@ -319,9 +319,7 @@ mode "$mode_launcher" {
 # Open applications on specific workspaces
 assign [class="Thunderbird"] $ws1
 assign [class="Firefox"] $ws1
-assign [class="Telegram"] $ws1
 assign [class="Hexchat"] $ws1
-assign [class="Skype"] $ws1
 assign [class="Teamviewer"] $ws1
 assign [class="libreoffice"] $ws2
 assign [class="Xed"] $ws2
@@ -339,6 +337,8 @@ assign [class="Clamtk"] $ws4
 assign [class="Bleachbit"] $ws4
 assign [class="Gnome-mahjongg"] $ws5
 assign [class="Notejot"] $ws7
+assign [class="Telegram"] $ws8
+assign [class="Skype"] $ws8
 
 # Open specific applications in floating mode
 for_window [class="xclipboard"] floating enable
@@ -358,8 +358,9 @@ for_window [class="(?i)System-config-printer.py"] floating enable border normal
 for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="(?i)virtualbox"] fullscreen enable 
 for_window [class="Xfburn"] floating enable
-for_window [class="Bleachbit"] floating enable
-for_window [class="TelegramDesktop"] floating enable
+for_window [class="Bleachbit"] floating enable border normal
+for_window [class="TelegramDesktop"] floating enable border normal
+for_window [class="Skype"] floating enable border normal
 
 ############################
 # Icon on Window Title Bar #
