@@ -1,11 +1,11 @@
- #############################################  
+ #############################################
 #  ____  _____
 # |  __||_   _|  Cyber Trekker
 # | |     | |    cyber.trekker@protonmail.com
 # | |__   | |
 # |____|  |_|	 ¯\_(ツ)_/¯ 
 # Maintained by Cyber Trekker
-# 03-2019 > 05-2019 ver 4.09
+# 03-2019 > 06-2019 ver 4.11
  ##############################################
 
 # A customized config for i3wm (http://www.i3wm.org) 
@@ -136,11 +136,17 @@ bindsym $mod+Shift+minus move scratchpad
 # Show the first scratchpad window
 bindsym $mod+minus scratchpad show
 bindsym $mod+F1 [con_mark="scratch1"] scratchpad show
+# Show the second scratchpad window
+bindsym $mod+F2 [con_mark="scratch2"] scratchpad show
 
 # Move scratchpad
 bindsym $mod+Shift+M mark "scratchterm", move scratchpad
 bindsym $mod+Shift+F1 mark "scratch1", move scratchpad
+bindsym $mod+Shift+F2 mark "scratch2", move scratchpad
 
+##############
+# Xresources #
+##############
 # The ~/.Xresources should contain a line such as
 #     *color0: #121212
 # and must be loaded properly, e.g., by using
@@ -293,14 +299,15 @@ bar {
 #################
 # Mode Launcher #
 #################
-# Press $mod+o followed by either f, t, Escape or Return to launch firefox,
-# thunderbird or return to the default mode, respectively.
-set $mode_launcher Launch: [f]irefox [t]hunderbird
+# Press $mod+o followed by either f, t, h, Escape or Return to launch firefox,
+# thunderbird, hexchat, or return to the default mode, respectively.
+set $mode_launcher Launch: [f]irefox [t]hunderbird [h]exchat
 bindsym $mod+o mode "$mode_launcher"
 
 mode "$mode_launcher" {
     bindsym f exec firefox
     bindsym t exec thunderbird
+    bindsym h exec hexchat
 
     bindsym Escape mode "default"
     bindsym Return mode "default"
@@ -315,6 +322,7 @@ assign [class="Firefox"] $ws1
 assign [class="Telegram"] $ws1
 assign [class="Hexchat"] $ws1
 assign [class="Skype"] $ws1
+assign [class="Teamviewer"] $ws1
 assign [class="libreoffice"] $ws2
 assign [class="Xed"] $ws2
 assign [class="Qalculate"] $ws2
@@ -323,6 +331,7 @@ assign [class="Nautilus"] $ws2
 assign [class="Shutter"] $ws2
 assign [class="Gradio"] $ws3
 assign [class="Pinta"] $ws3
+assign [class="Rawtherapee"] $ws3
 assign [class="Xfburn"] $ws3
 assign [class="Tilix"] $ws4
 assign [class="Seahorse"] $ws4
@@ -332,8 +341,7 @@ assign [class="Gnome-mahjongg"] $ws5
 assign [class="Notejot"] $ws7
 
 # Open specific applications in floating mode
-for_window [class="qalculate-gtk"] floating enable border pixel 1
-for_window [class="xclip"] floating enable
+for_window [class="xclipboard"] floating enable
 for_window [title="File Transfer*"] floating enable
 for_window [class="Notejot"] floating enable border normal
 for_window [class="GParted"] floating enable border normal
@@ -352,18 +360,21 @@ for_window [class="(?i)virtualbox"] fullscreen enable
 for_window [class="Xfburn"] floating enable
 for_window [class="Bleachbit"] floating enable
 for_window [class="TelegramDesktop"] floating enable
-for_window [class="Skype"] floating enable border normal
 
 ############################
 # Icon on Window Title Bar #
 ############################
 for_window [class="(?i)firefox"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
 for_window [class="(?i)thunderbird"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
+for_window [class="(?i)torbrowser"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
 for_window [class="(?i)telegram"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
 for_window [class="(?i)hexchat"] title_format "<tt></tt><span foreground='#FF6611'>    </span><tt> </tt>%title"
 for_window [class="(?i)skype"] title_format "<tt></tt><span foreground='#FF6611'>    </span><tt> </tt>%title"
+for_window [class="(?i)orion"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
 for_window [class="(?i)dropbox"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
 for_window [class="(?i)gimp"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
+for_window [class="(?i)pinta"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
+for_window [class="(?i)pinta"] title_format "<tt></tt><span foreground='#FF6611'>  </span><tt> </tt>%title"
 for_window [class="(?i)gradio"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
 for_window [class="(?i)terminal"] title_format "<tt></tt><span foreground='#FF6611'>  </span><tt> </tt>%title"
 for_window [class="(?i)tilix"] title_format "<tt></tt><span foreground='#FF6611'>  </span><tt> </tt>%title"
@@ -376,8 +387,9 @@ for_window [class="(?i)libreoffice"] title_format "<tt></tt><span foreground='#F
 for_window [class="(?i)gnome-mahjongg"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
 for_window [class="(?i)steam"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
 for_window [title="Virtual Machine Manager"] title_format "<tt></tt><span foreground='#AAAAFF' >   </span><tt> </tt>%title"
+ for_window [class="(?i)teamviewer"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
 for_window [class="(?i)qpdfview"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
-for_window [class="(?i)qalcalculate"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
+for_window [class="(?i)qalculate-gtk"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
 
 #########################
 # Start-up Applications #
