@@ -373,7 +373,7 @@ for_window [class="(?i)skype"] title_format "<tt></tt><span foreground='#FF6611'
 for_window [class="(?i)orion"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
 for_window [class="(?i)dropbox"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
 for_window [class="(?i)gimp"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
-for_window [class="(?i)pinta"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
+for_window [class="(?i)rawtherapee"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
 for_window [class="(?i)pinta"] title_format "<tt></tt><span foreground='#FF6611'>  </span><tt> </tt>%title"
 for_window [class="(?i)gradio"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
 for_window [class="(?i)terminal"] title_format "<tt></tt><span foreground='#FF6611'>  </span><tt> </tt>%title"
