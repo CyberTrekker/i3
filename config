@@ -39,7 +39,7 @@ font pango:monospace 9
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# kill focused window
+# Kill focused window
 bindsym $mod+Shift+q kill
 
 ############
