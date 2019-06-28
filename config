@@ -5,7 +5,7 @@
 # | |__   | |
 # |____|  |_|	 ¯\_(ツ)_/¯ 
 # Customized and Maintained by Cyber Trekker
-# 03-2019 > 06-2019 ver 4.16
+# 03-2019 > 06-2019 ver 4.17
  ##############################################
 
 # A customized config for i3wm (http://www.i3wm.org) 
@@ -284,6 +284,12 @@ show_marks yes
 
 # Window title alignment
 title_align center
+
+# give the focused window a prefix
+bindsym $mod+p title_format "Important | %title"
+
+# print all window titles bold
+for_window [class=".*"] title_format "<b>%title</b>"
 
 # Print window titles of firefox windows red
 for_window [class="(?i)firefox"] title_format "<span foreground='red'>%title</span>"
