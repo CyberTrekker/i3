@@ -5,7 +5,7 @@
 # | |__   | |
 # |____|  |_|	 ¯\_(ツ)_/¯ 
 # Customized and Maintained by Cyber Trekker
-# 03-2019 > 06-2019 ver 4.15
+# 03-2019 > 06-2019 ver 4.16
  ##############################################
 
 # A customized config for i3wm (http://www.i3wm.org) 
@@ -133,6 +133,12 @@ bindsym $mod+F2 [con_mark="scratch2"] scratchpad show
 bindsym $mod+Shift+M mark "scratchterm", move scratchpad
 bindsym $mod+Shift+F1 mark "scratch1", move scratchpad
 bindsym $mod+Shift+F2 mark "scratch2", move scratchpad
+
+# Dropdown Qalculator
+for_window [class=Qalculate] move scratchpad
+for_window [class=Qalculate] resize set 720 510
+bindsym $mod+y [class=Qalculate] scratchpad show; move position center
+bindsym $mod+Shift+y exec qalculate-gtk --class=Qalculate
 
 ##############
 # Xresources #
@@ -328,7 +334,6 @@ assign [class="Hexchat"] $ws1
 assign [class="Teamviewer"] $ws1
 assign [class="libreoffice"] $ws2
 assign [class="Xed"] $ws2
-assign [class="Qalculate"] $ws2
 assign [class="Qpdfview"] $ws2
 assign [class="Nautilus"] $ws2
 assign [class="Shutter"] $ws2
