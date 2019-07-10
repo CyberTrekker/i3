@@ -5,7 +5,7 @@
 # | |__   | |
 # |____|  |_|	 ¯\_(ツ)_/¯ 
 # Customized and Maintained by Cyber Trekker
-# 03-2019 > 06-2019 ver 4.17
+# 03-2019 > 07-2019 ver 4.18
  ##############################################
 
 # A customized config for i3wm (http://www.i3wm.org) 
@@ -140,6 +140,10 @@ for_window [class=Qalculate] resize set 720 510
 bindsym $mod+y [class=Qalculate] scratchpad show; move position center
 bindsym $mod+Shift+y exec qalculate-gtk --class=Qalculate
 
+# YouTube
+bindcode $mod+90 [title="YouTube"] scratchpad show
+for_window [title="YouTube"] sticky enable
+
 ##############
 # Xresources #
 ##############
@@ -156,13 +160,13 @@ set_from_resource $black i3wm.color0 #000000
 ##############
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1: Net "
-set $ws2 "2: Office "
-set $ws3 "3: Media "
-set $ws4 "4: ConfSec "
-set $ws5 "5: Game "
+set $ws1 "1: Net  "
+set $ws2 "2: Office  "
+set $ws3 "3: Media  "
+set $ws4 "4: ConfSec  "
+set $ws5 "5: Game  "
 set $ws6 "6: Science "
-set $ws7 "7: SP1 "
+set $ws7 "7: SP1  "
 set $ws8 "8: SP2 "
 set $ws9 "9"
 set $ws10 "10"
@@ -356,7 +360,10 @@ assign [class="Notejot"] $ws7
 assign [class="Telegram"] $ws8
 assign [class="Skype"] $ws8
 
-# Open specific applications in floating mode
+###############################################
+# Open Specific Applications in Floating Mode #
+###############################################
+for_window [window_role="(?i)pop-up"] floating enable
 for_window [title="File Transfer*"] floating enable
 for_window [class="Notejot"] floating enable border normal
 for_window [class="GParted"] floating enable border normal
@@ -450,3 +457,4 @@ exec --no-startup-id run_keybase
 # xkill
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 
+######### END ############
