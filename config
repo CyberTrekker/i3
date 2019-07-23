@@ -439,7 +439,7 @@ exec --no-startup-id volumeicon
 # hp-systray: HP systray applet in systray
 exec --no-startup-id hp-systray
 
-# Synapse: Launcher
+# Synapse: Launcher in systray
 exec --no-startup-id synapse
 
 # pidgin: A Gtk+ based multiprotocol instant messaging client in systray
@@ -457,7 +457,7 @@ exec --no-startup-id run_keybase
 # xkill
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 
-# Radiotray-ng
+# Radiotray-ng in systray
 exec --no-startup-id radiotray-ng
 
 ######### END ############
