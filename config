@@ -458,6 +458,6 @@ exec --no-startup-id run_keybase
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 
 # Radiotray-ng
-exec --no-startup-id
+exec --no-startup-id radiotray-ng
 
 ######### END ############
