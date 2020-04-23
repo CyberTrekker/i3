@@ -4,7 +4,7 @@
 # ¯\_(ツ)_/¯
 # Customized and Maintained by Cyber Trekker
 #     ~ i3wm C O N F I G U R A T I O N ~
-# 03-2019 > 02-2020 ver 4.22
+# 03-2019 > 04-2020 ver 4.24
 ##############################################
 
 # A customized config for i3wm (http://www.i3wm.org)
@@ -165,8 +165,8 @@ set $ws3 "3: Media  "
 set $ws4 "4: ConfSec  "
 set $ws5 "5: Game  "
 set $ws6 "6: Science "
-set $ws7 "7: SP1  "
-set $ws8 "8: SP2 "
+set $ws7 "7: Notes  "
+set $ws8 "8: Chat "
 set $ws9 "9"
 set $ws10 "10"
 
@@ -340,7 +340,6 @@ mode "$mode_launcher" {
 assign [class="Thunderbird"] $ws1
 assign [class="Firefox"] $ws1
 assign [class="Hexchat"] $ws1
-assign [class="ICQ"] $ws1
 assign [class="Teamviewer"] $ws1
 assign [class="libreoffice"] $ws2
 assign [class="Xed"] $ws2
@@ -357,6 +356,7 @@ assign [class="Bleachbit"] $ws4
 assign [class="Gnome-mahjongg"] $ws5
 assign [class="Notejot"] $ws7
 assign [class="Telegram"] $ws8
+assign [class="icq"] $ws8
 assign [class="Skype"] $ws8
 
 ###############################################
@@ -380,8 +380,6 @@ for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="(?i)virtualbox"] fullscreen enable
 for_window [class="Xfburn"] floating enable
 for_window [class="Bleachbit"] floating enable border normal
-for_window [class="TelegramDesktop"] floating enable border normal
-for_window [class="Skype"] floating enable border normal
 
 ############################
 # Icon on Window Title Bar #
@@ -392,7 +390,7 @@ for_window [class="(?i)torbrowser"] title_format "<tt></tt><span foreground='#FF
 for_window [class="(?i)telegram"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
 for_window [class="(?i)hexchat"] title_format "<tt></tt><span foreground='#FF6611'>    </span><tt> </tt>%title"
 for_window [class="(?i)skype"] title_format "<tt></tt><span foreground='#FF6611'>    </span><tt> </tt>%title"
-for_window [class="(?i)icq"] title_format "<tt></tt><span foreground='#FF6611'>    </span><tt> </tt>%title"
+for_window [class="(?i)icq-im.icq"] title_format "<tt></tt><span foreground='#FF6611'>    </span><tt> </tt>%title"
 for_window [class="(?i)orion"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
 for_window [class="(?i)dropbox"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
 for_window [class="(?i)gimp"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
@@ -425,8 +423,8 @@ exec --no-startup-id sh /home/cybertrekker/.fehbg
 # blueman-applet: Bluetooth management applet in systray
 exec --no-startup-id blueman-applet
 
-# compton: Compositor
-exec_always --no-startup-id compton -b
+# picom: Compositor
+exec_always --no-startup-id picom -b
 
 # mpd: Music player daemon
 exec --no-startup-id mpd
