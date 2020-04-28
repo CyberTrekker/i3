@@ -1,11 +1,24 @@
-##############################################
+##############################################################################################
 # Cyb3r Tr3kk3r
 # cyber.trekker@protonmail.com
-# ¯\_(ツ)_/¯
+#            .--,-``-.                                                                        
+#           /   /     '.            ,----..                                                   
+#   ,--,   / ../        ;          /   /   \                        .--.,   ,--,              
+# ,--.'|   \ ``\  .`-    '        |   :     :  ,---.        ,---, ,--.'  \,--.'|              
+# |  |,     \___\/   \   :        .   |  ;. / '   ,'\   ,-+-. /  ||  | /\/|  |,     ,----._,. 
+# `--'_          \   :   |        .   ; /--` /   /   | ,--.'|'   |:  : :  `--'_    /   /  ' / 
+# ,' ,'|         /  /   /         ;   | ;   .   ; ,. :|   |  ,"' |:  | |-,,' ,'|  |   :     | 
+# '  | |         \  \   \         |   : |   '   | |: :|   | /  | ||  : :/|'  | |  |   | .\  . 
+# |  | :     ___ /   :   |        .   | '___'   | .; :|   | |  | ||  |  .'|  | :  .   ; ';  | 
+# '  : |__  /   /\   /   :        '   ; : .'|   :    ||   | |  |/ '  : '  '  : |__'   .   . | 
+# |  | '.'|/ ,,/  ',-    .        '   | '/  :\   \  / |   | |--'  |  | |  |  | '.'|`---`-'| | 
+# ;  :    ;\ ''\        ;         |   :    /  `----'  |   |/      |  : \  ;  :    ;.'__/\_: | 
+# |  ,   /  \   \     .'           \   \ .'           '---'       |  |,'  |  ,   / |   :    : 
+#  ---`-'    `--`-,,-'              `---`                         `--'     ---`-'   \   \  /  
+#                                                                                  `--`-'   
 # Customized and Maintained by Cyber Trekker
-#     ~ i3wm C O N F I G U R A T I O N ~
-# 03-2019 > 04-2020 ver 4.24
-##############################################
+# 03-2019 > 04-2020 ver 4.25
+##############################################################################################
 
 # A customized config for i3wm (http://www.i3wm.org)
 # This config file will not be overwritten, so edit it to your personal need and preference.
@@ -203,9 +216,9 @@ bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_
 # Control Key Mappings #
 ########################
 # PulseAudio (volume) controls
-bindsym XF86AudioRaiseVolume exec "amixer -D pulse set Master 5%+ unmute"
-bindsym XF86AudioLowerVolume exec "amixer -D pulse set Master 5%- unmute"
-bindsym XF86AudioMute exec "amixer -D pulse set Master toggle"
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q sset Master 3%+
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q sset Master 3%-
+bindsym XF86AudioMute exec --no-startup-id amixer -q sset Master toggle # mute sound
 
 # Media player controls
 bindsym XF86AudioPlay exec "playerctl play-pause"
@@ -413,6 +426,11 @@ for_window [class="(?i)qalculate-gtk"] title_format "<tt></tt><span foreground='
 #########################
 # Start-up Applications #
 #########################
+# Pulseaudio
+exec_always --no-startup-id pulseaudio --start
+exec --no-startup-id pulseaudio --kill
+exec --no-startup-id pulseaudio --start
+
 # nm-applet: Network management applet in systray
 exec --no-startup-id nm-applet
 
@@ -431,6 +449,9 @@ exec --no-startup-id mpd
 
 # Volumeicon: Lightweight volume control applet in systray
 exec --no-startup-id volumeicon
+
+# Redshift GTK: GTK integration for Redshift
+exec --no-startup-id redshift-gtk
 
 # hp-systray: HP systray applet in systray
 exec --no-startup-id hp-systray
