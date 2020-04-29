@@ -17,7 +17,7 @@
 #  ---`-'    `--`-,,-'              `---`                         `--'     ---`-'   \   \  /  
 #                                                                                  `--`-'   
 # Customized and Maintained by Cyber Trekker
-# 03-2019 > 04-2020 ver 4.25
+# 03-2019 > 04-2020 ver 4.26
 ##############################################################################################
 
 # A customized config for i3wm (http://www.i3wm.org)
@@ -59,7 +59,7 @@ bindsym $mod+Shift+q kill
 # Terminal #
 ############
 # Start a terminal
-bindsym $mod+Return exec tilda
+bindsym $mod+Return exec xfce4-terminal
 
 ##############
 # Lockscreen #
@@ -177,9 +177,9 @@ set $ws2 "2: Office  "
 set $ws3 "3: Media  "
 set $ws4 "4: ConfSec  "
 set $ws5 "5: Game  "
-set $ws6 "6: Science "
+set $ws6 "6: Science  "
 set $ws7 "7: Notes  "
-set $ws8 "8: Chat "
+set $ws8 "8: Chat   "
 set $ws9 "9"
 set $ws10 "10"
 
@@ -226,6 +226,12 @@ bindsym XF86AudioNext exec "playerctl next"
 bindsym XF86AudioPrev exec "playerctl previous"
 
 bindsym $mod+Ctrl+m exec pavucontrol
+
+# increase brightness
+bindsym XF86MonBrightnessUp exec "light -A 5"
+
+# decrease brightness
+bindsym XF86MonBrightnessDown exec "light -U 5"
 
 # Reload the configuration file
 bindsym $mod+Shift+c reload
@@ -362,7 +368,7 @@ assign [class="Shutter"] $ws2
 assign [class="Pinta"] $ws3
 assign [class="Rawtherapee"] $ws3
 assign [class="Xfburn"] $ws3
-assign [class="Tilda"] $ws4
+assign [class="Xfce4-terminal"] $ws4
 assign [class="Seahorse"] $ws4
 assign [class="Clamtk"] $ws4
 assign [class="Bleachbit"] $ws4
@@ -409,8 +415,7 @@ for_window [class="(?i)dropbox"] title_format "<tt></tt><span foreground='#FF661
 for_window [class="(?i)gimp"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
 for_window [class="(?i)rawtherapee"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
 for_window [class="(?i)pinta"] title_format "<tt></tt><span foreground='#FF6611'>  </span><tt> </tt>%title"
-for_window [class="(?i)terminal"] title_format "<tt></tt><span foreground='#FF6611'>  </span><tt> </tt>%title"
-for_window [class="(?i)tilda"] title_format "<tt></tt><span foreground='#FF6611'>  </span><tt> </tt>%title"
+for_window [class="(?i)xfce4-terminal"] title_format "<tt></tt><span foreground='#FF6611'>  </span><tt> </tt>%title"
 for_window [class="(?i)seahorse"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
 for_window [class="(?i)nautilus"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
 for_window [class="(?i)xed"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
@@ -432,14 +437,14 @@ exec --no-startup-id pulseaudio --kill
 exec --no-startup-id pulseaudio --start
 
 # nm-applet: Network management applet in systray
-exec --no-startup-id nm-applet
+exec --no-startup-id nm-applet &
 
 # feh: Wallpaper
 exec --no-startup-id feh
 exec --no-startup-id sh /home/cybertrekker/.fehbg
 
 # blueman-applet: Bluetooth management applet in systray
-exec --no-startup-id blueman-applet
+exec --no-startup-id blueman-applet &
 
 # picom: Compositor
 exec_always --no-startup-id picom -b
@@ -451,7 +456,7 @@ exec --no-startup-id mpd
 exec --no-startup-id volumeicon
 
 # Redshift GTK: GTK integration for Redshift
-exec --no-startup-id redshift-gtk
+exec --no-startup-id redshift-gtk &
 
 # hp-systray: HP systray applet in systray
 exec --no-startup-id hp-systray
