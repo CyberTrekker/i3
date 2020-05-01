@@ -1,23 +1,23 @@
 #############################################################################################
 # Cyb3r Tr3kk3r
 # cyber.trekker@protonmail.com
-#            .--,-``-.                                                                        
-#           /   /     '.            ,----..                                                   
-#   ,--,   / ../        ;          /   /   \                        .--.,   ,--,              
-# ,--.'|   \ ``\  .`-    '        |   :     :  ,---.        ,---, ,--.'  \,--.'|              
-# |  |,     \___\/   \   :        .   |  ;. / '   ,'\   ,-+-. /  ||  | /\/|  |,     ,----._,. 
-# `--'_          \   :   |        .   ; /--` /   /   | ,--.'|'   |:  : :  `--'_    /   /  ' / 
-# ,' ,'|         /  /   /         ;   | ;   .   ; ,. :|   |  ,"' |:  | |-,,' ,'|  |   :     | 
-# '  | |         \  \   \         |   : |   '   | |: :|   | /  | ||  : :/|'  | |  |   | .\  . 
-# |  | :     ___ /   :   |        .   | '___'   | .; :|   | |  | ||  |  .'|  | :  .   ; ';  | 
-# '  : |__  /   /\   /   :        '   ; : .'|   :    ||   | |  |/ '  : '  '  : |__'   .   . | 
-# |  | '.'|/ ,,/  ',-    .        '   | '/  :\   \  / |   | |--'  |  | |  |  | '.'|`---`-'| | 
-# ;  :    ;\ ''\        ;         |   :    /  `----'  |   |/      |  : \  ;  :    ;.'__/\_: | 
-# |  ,   /  \   \     .'           \   \ .'           '---'       |  |,'  |  ,   / |   :    : 
-#  ---`-'    `--`-,,-'              `---`                         `--'     ---`-'   \   \  /  
-#                                                                                  `--`-'   
+#            .--,-``-.
+#           /   /     '.            ,----..
+#   ,--,   / ../        ;          /   /   \                        .--.,   ,--,
+# ,--.'|   \ ``\  .`-    '        |   :     :  ,---.        ,---, ,--.'  \,--.'|
+# |  |,     \___\/   \   :        .   |  ;. / '   ,'\   ,-+-. /  ||  | /\/|  |,     ,----._,.
+# `--'_          \   :   |        .   ; /--` /   /   | ,--.'|'   |:  : :  `--'_    /   /  ' /
+# ,' ,'|         /  /   /         ;   | ;   .   ; ,. :|   |  ,"' |:  | |-,,' ,'|  |   :     |
+# '  | |         \  \   \         |   : |   '   | |: :|   | /  | ||  : :/|'  | |  |   | .\  .
+# |  | :     ___ /   :   |        .   | '___'   | .; :|   | |  | ||  |  .'|  | :  .   ; ';  |
+# '  : |__  /   /\   /   :        '   ; : .'|   :    ||   | |  |/ '  : '  '  : |__'   .   . |
+# |  | '.'|/ ,,/  ',-    .        '   | '/  :\   \  / |   | |--'  |  | |  |  | '.'|`---`-'| |
+# ;  :    ;\ ''\        ;         |   :    /  `----'  |   |/      |  : \  ;  :    ;.'__/\_: |
+# |  ,   /  \   \     .'           \   \ .'           '---'       |  |,'  |  ,   / |   :    :
+#  ---`-'    `--`-,,-'              `---`                         `--'     ---`-'   \   \  /
+#                                                                                  `--`-'
 # Customized and Maintained by Cyber Trekker
-# 03-2019 > 04-2020 ver 4.26
+# 03-2019 > 05-2020 ver 4.27
 ##############################################################################################
 
 # A customized config for i3wm (http://www.i3wm.org)
@@ -66,9 +66,17 @@ bindsym $mod+Return exec xfce4-terminal
 ##############
 # exec --no-startup-id xautolock -time 10 -locker i3lock
 
-########## Keybindings ##########
+###############
+# Keybindings #
+###############
 # Easier locking
 bindsym mod4+shift+s exec i3lock -c 000000
+
+# Simulate ctrl+v upon pressing $mod+c
+bindsym --release $mod+x exec --no-startup-id xdotool key --clearmodifiers ctrl+v
+
+# Take a screenshot upon pressing $mod+c (select an area)
+bindsym --release $mod+c exec --no-startup-id import /tmp/latest-screenshot.png
 
 ####################################
 # Start dmenu (a program launcher) #
@@ -227,12 +235,6 @@ bindsym XF86AudioPrev exec "playerctl previous"
 
 bindsym $mod+Ctrl+m exec pavucontrol
 
-# increase brightness
-bindsym XF86MonBrightnessUp exec "light -A 5"
-
-# decrease brightness
-bindsym XF86MonBrightnessDown exec "light -U 5"
-
 # Reload the configuration file
 bindsym $mod+Shift+c reload
 
@@ -242,11 +244,14 @@ bindsym $mod+Shift+r restart
 # Exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
-# Simulate ctrl+v upon pressing $mod+c
-bindsym --release $mod+x exec --no-startup-id xdotool key --clearmodifiers ctrl+v
+#####################
+# Screen brightness #
+#####################
+	# increase screen brightness
+bindsym XF86MonBrightnessUp exec "light -A 5"
 
-# Take a screenshot upon pressing $mod+c (select an area)
-bindsym --release $mod+c exec --no-startup-id import /tmp/latest-screenshot.png
+	# decrease screen brightness
+bindsym XF86MonBrightnessDown exec "light -U 5"
 
 #######################################################
 # Set Power (shut down, restart and locking features) #
@@ -254,7 +259,7 @@ bindsym --release $mod+c exec --no-startup-id import /tmp/latest-screenshot.png
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
     bindsym l exec --no-startup-id i3exit lock, mode "default"
-    bindsym e exec --no-startup-id i3exit logout, mode "default"
+    bindsym e exec --no-startup-id i3exit logout, mode "default
     bindsym s exec --no-startup-id i3exit suspend, mode "default"
     bindsym h exec --no-startup-id i3exit hibernate, mode "default"
     bindsym r exec --no-startup-id i3exit reboot, mode "default"
@@ -459,7 +464,7 @@ exec --no-startup-id volumeicon
 exec --no-startup-id redshift-gtk &
 
 # hp-systray: HP systray applet in systray
-exec --no-startup-id hp-systray
+exec --no-startup-id hp-systray &
 
 # Synapse: Launcher in systray
 exec --no-startup-id synapse
@@ -471,7 +476,7 @@ exec --no-startup-id dropbox start
 exec --no-startup-id keepassxc
 
 # keybase: Encrypted social media chat in systray
-exec --no-startup-id run_keybase
+# exec --no-startup-id run_keybase
 
 # xkill
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
