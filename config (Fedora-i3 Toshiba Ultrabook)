@@ -1,7 +1,7 @@
 ###############################################
 # i3wm Config for Fedora-i3 Toshiba Ultrabook
 # Customized & Maintained by Cyber Trekker
-# 02-2021 > 02-2021 ver 0.01.4
+# 02-2021 > 02-2021 ver 0.01.5
 # Cyb3r Tr3kk3r   cyber.trekker@protonmail.com
 ###############################################
 
@@ -225,7 +225,7 @@ bindsym $mod+p title_format "Important | %title"
 for_window [class=".*"] title_format "<b>%title</b>"
 
 # Print window titles of firefox windows red
-for_window [class="(?i)firefox"] title_format "<span foreground='red'>%title</span>"
+for_window [class="(?i)Firefox"] title_format "<span foreground='red'>%title</span>"
 
 # Popup during fullscreen mode
 popup_during_fullscreen smart
