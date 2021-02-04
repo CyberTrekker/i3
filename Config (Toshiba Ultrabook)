@@ -1,7 +1,7 @@
 ###############################################
 # i3wm Config for Fedora-i3wm Toshiba Ultrabook
 # Customized & Maintained by Cyber Trekker
-# 02-2021 > 02-2021 ver 0.02.00
+# 02-2021 > 02-2021 ver 0.02.01
 # Cyb3r Tr3kk3r  cyber.trekker@protonmail.com
 # Github    https://github.com/CyberTrekker
 # Gitlab    https://gitlab.com/CyberTrekker
@@ -365,6 +365,7 @@ bindsym $mod+Ctrl+t exec --no-startup-id thunderbird
 bindsym $mod+Ctrl+h exec --no-startup-id hexchat
 bindsym $mod+Ctrl+e exec --no-startup-id telegram-desktop
 bindsym $mod+Ctrl+g exec --no-startup-id galculator
+bindsym $mod+Ctrl+s exec --no-startup-id shutter
 bindsym $mod+Ctrl+b exec --no-startup-id bleachbit
 
 
