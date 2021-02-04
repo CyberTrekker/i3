@@ -1,7 +1,5 @@
 # i3wm
-I use Fedora Linux.
-
-Output of terminal command, $ i3 --version: i3 version 4.19 (2020-11-15) © 2009 Michael Stapelberg and contributors
+I use Fedora Linux on both machines.
 
 Files for my custom configuration of the i3wm (i3 window manager).
 
