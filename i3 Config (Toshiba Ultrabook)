@@ -1,7 +1,7 @@
 ###############################################
 # i3wm Config for Fedora-i3wm Toshiba Ultrabook
 # Customized & Maintained by Cyber Trekker
-# 02-2021 > 02-2021 ver 0.02.08
+# 02-2021 > 02-2021 ver 0.02.09
 # Cyb3r Tr3kk3r  cyber.trekker@protonmail.com
 # Github    https://github.com/CyberTrekker
 # Gitlab    https://gitlab.com/CyberTrekker
@@ -37,7 +37,7 @@ font pango:monospace 8
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -c 000000 --nofork
 
 ################################################################
 # Set Power Function (shut down, restart and locking features) #
@@ -45,7 +45,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # Key combinations for shutdown, reboot and screenlock can be added to ~/.config/i3/config.
 # The below example assumes you have polkit installed to allow unprivileged users to run 
 # power management commands.
-set $Locker i3lock && sleep 1
+set $Locker i3lock -c 000000 && sleep 1
 set $mode_system System  (l) lock,  (e) logout,  (s) suspend, (h) hibernate,  (r) reboot,  (Shift+s) shutdown
 mode "$mode_system" {
     bindsym l exec --no-startup-id $Locker, mode "default"
