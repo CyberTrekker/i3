@@ -2,7 +2,7 @@
 # Fedora i3 Spin
 #   ~ i 3 W M  C O N F I G U R A T I O N ~
 # Customized & Maintained by Cyber Trekker
-# 03-2021 > 04-2021 ver 0.05.92
+# 03-2021 > 04-2021 ver 0.05.93
 # Cyb3r Tr3kk3r  cyber.trekker@protonmail.com
 # Gitlab    https://gitlab.com/CyberTrekker
 ##############################################
@@ -279,7 +279,7 @@ for_window [title="galculator"] move window to scratchpad
 for_window [title="urxvt"] move window to scratchpad
 for_window [title="YouTube"] move window scratchpad sticky enable border none
 for_window [title="mpv"] move window scratchpad sticky enable border none
-for_window [title="netflix"] move window scratchpad sticky enable boarder none
+for_window [title="Netflix"] move window scratchpad sticky enable boarder none
 
 #############################
 # Reload, Restart & Exit i3 #
