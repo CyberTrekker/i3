@@ -1,174 +1,200 @@
-###############################################
-# i3wm Config for Fedora-i3wm Alienware Laptop
+##################################################
+# Fedora i3wm - Alienware M14xR1 A08
+#   ~ i 3 W M  C O N F I G U R A T I O N ~
 # Customized & Maintained by Cyber Trekker
+# 08-2022 > 06-2023 ver 0.01.01
 # Cyb3r Tr3kk3r  cyber.trekker@protonmail.com
-# Github    https://github.com/CyberTrekker
-# Gitlab    https://gitlab.com/CyberTrekker
-# 03-2019 > 02-2021 ver 4.48.7
-###############################################
+# Gitlab https://gitlab.com/CyberTrekker/dotfiles
+##################################################
 
-# A customized config for i3wm (http://www.i3wm.org)
-# This config file will not be overwritten, so edit it to your personal need and preference.
-#
-# Should you change your keyboard layout, delete this file and re-run i3-config-wizard(1).
-#
-# Please see https://i3wm.org/docs/userguide.html for a complete reference.
-# i3 config file (v4)
-
-###############
-# Set Mod Key #
-###############
-# Mod4 is the Super (Windows) key, while Mod1 is the ALT key.
+#############
+# Constants
+# Windows key is Mod4. Meta Key - Alt key is Mod1
 set $mod Mod4
+set $alt Mod1
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:monospace 9
+# font pango:monospace 8
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 8
-# Before i3 v4.8, we used to recommend this one as the default:
-# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-# The font above is very space-efficient, that is, it looks good, sharp and
-# clear in small sizes. However, its unicode glyph coverage is limited, the old
-# X core fonts rendering does not support right-to-left and this being a bitmap
-# font, it doesn’t scale on retina/hidpi displays.
+font pango:DejaVu Sans Mono 8
 
-# Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
+# The combination of xss-lock, nm-applet and pactl is a popular choice, so
+# they are included here as an example. Modify as you see fit.
+# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
+# screen before suspend. Use loginctl lock-session to lock your screen.
+# exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id xss-lock -time 10 --transfer-sleep-lock -- i3lock --nofork -corners 000- -c 000000
+bindsym $alt+b exec i3lock --show-failed-attempts -c 000000
 
-# kill focused window
-bindsym $mod+Shift+q kill
+# NetworkManager is the most popular way to manage wireless networks on Linux,
+# and nm-applet is a desktop environment-independent system tray GUI for it.
+exec --no-startup-id nm-applet
+
+#################
+# Function Keys
+# Use pactl to adjust volume in PulseAudio.
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+# Screen brightness controls
+bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+
+# Media player controls
+bindsym XF86AudioPlay exec playerctl play
+bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+bindsym $mod+Next exec $tidal next
+bindsym $mod+End exec $tidal previous
+bindsym $mod+Delete exec $tidal playpause
 
 ############
-# Terminal #
+# Terminal
+# Launch // Terminal // <> Enter
+# bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec xfce4-terminal
+
+# Launch // Dropdown Terminal // <Alt> Slash
+# Xfce dropdown terminal
+bindsym mod1+slash exec xfce4-terminal --drop-down
+
 ############
-# Start a terminal
-bindsym $mod+Return exec tilix
+# Launcher
+# Start dmenu (a program launcher)
+# bindsym $mod+d exec --no-startup-id dmenu_run
+# A more modern dmenu replacement is rofi:
+bindcode $mod+40 exec "rofi  -modi drun,run -show drun"
+# There also is i3-dmenu-desktop which only displays applications shipping a
+# .desktop file. It is a wrapper around dmenu, so you need that installed.
+# bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 
-###############
-# Keybindings #
-###############
-# Easier locking
-bindsym mod4+shift+s exec i3lock -b -f -i /usr/share/backgrounds/blackhat-hacker-CT.png
-
-# Simulate ctrl+v upon pressing $mod+c
-bindsym --release $mod+x exec --no-startup-id xdotool key --clearmodifiers ctrl+v
-
-# Take a screenshot upon pressing $mod+c (select an area)
-bindsym --release $mod+c exec --no-startup-id import /tmp/latest-screenshot.png
-
-####################################
-# Start dmenu (a program launcher) #
-####################################
-bindsym $mod+d exec dmenu_run
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-
-# Change focus
+##################################################################
+# Window & Container Placement - navigating windows & containers
+# Modify // Window Position // <><j k l ;> ↑ ↓ ← →
+# change focus
 bindsym $mod+j focus left
 bindsym $mod+k focus down
 bindsym $mod+l focus up
 bindsym $mod+semicolon focus right
 
-# Alternatively, you can use the cursor keys:
+# alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
-# Move focused window
+# Modify // Window Position // <><Shift> k j h l
+# move focused window
 bindsym $mod+Shift+j move left
 bindsym $mod+Shift+k move down
 bindsym $mod+Shift+l move up
 bindsym $mod+Shift+semicolon move right
 
-# Alternatively, you can use the cursor keys:
+# alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-# Split in horizontal orientation
+# Modify // Horizontal Window Orientation // <> h
+# split in horizontal orientation
 bindsym $mod+h split h
 
-# Split in vertical orientation
+# Modify // Vertical Window Orientation // <> v
+# split in vertical orientation
 bindsym $mod+v split v
 
-# Enter fullscreen mode for the focused container
+# Modify // Window Fullscreen Toggle // <> f
+# enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
-# Change container layout (stacked, tabbed, toggle split)
+# Modify // Window Layout Mode // <> s w e
+# change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
-# Toggle tiling / floating
+# Modify // Toggle Window Orientation // <><Shift> space <> space
+# toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
 # Change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
-# Focus the parent container
+# focus the parent container
 bindsym $mod+a focus parent
 
-# Focus the child container
-bindsym $mod+c focus child
+# focus the child container
+#bindsym $mod+d focus child
 
-##############
-# Xresources #
-##############
-# The ~/.Xresources should contain a line such as
-#     *color0: #121212
-# and must be loaded properly, e.g., by using
-#     xrdb ~/.Xresources
-# This value is picked up on by other applications (e.g., the URxvt terminal
-# emulator) and can be used in i3 like this:
-set_from_resource $black i3wm.color0 #000000
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
 
-##############
-# Workspaces #
-##############
-# Define names for default workspaces for which we configure key bindings later on.
-# We use variables to avoid repeating the names in multiple places.
-set $ws1 "1:  "
-set $ws2 "2:  "
-set $ws3 "3:  "
-set $ws4 "4:  "
-set $ws5 "5:  "
-set $ws6 "6:  "
-set $ws7 "7:  "
-set $ws8 "8:  "
-set $ws9 "9:  "
-set $ws10 "10:  "
+##################################
+# Set Workspace Names With Icons
+# Define names for default workspaces for which key bindings can be configured
+# later on. Variables are used to avoid repeating the names in multiple places.
+# To display names or symbols, instead of plain workspace numbers, something
+# similar to the following example can be used:
+# 			set $ws1 1:mail
+#                 	set $ws2 2:
+set $ws1 "1: "
+set $ws2 "2: "
+set $ws3 "3: "
+set $ws4 "4: "
+set $ws5 "5: "
+set $ws6 "6: "
+set $ws7 "7: "
+set $ws8 "8: ♫"
+set $ws9 "9: "
+set $ws10 "10: "
 
-# Switch to workspace
-bindsym $mod+1 workspace $ws1
-bindsym $mod+2 workspace $ws2
-bindsym $mod+3 workspace $ws3
-bindsym $mod+4 workspace $ws4
-bindsym $mod+5 workspace $ws5
-bindsym $mod+6 workspace $ws6
-bindsym $mod+7 workspace $ws7
-bindsym $mod+8 workspace $ws8
-bindsym $mod+9 workspace $ws9
-bindsym $mod+0 workspace $ws10
+#################################
+# Workspace Switching Functions
+# switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
 
-# Move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $ws1
-bindsym $mod+Shift+2 move container to workspace $ws2
-bindsym $mod+Shift+3 move container to workspace $ws3
-bindsym $mod+Shift+4 move container to workspace $ws4
-bindsym $mod+Shift+5 move container to workspace $ws5
-bindsym $mod+Shift+6 move container to workspace $ws6
-bindsym $mod+Shift+7 move container to workspace $ws7
-bindsym $mod+Shift+8 move container to workspace $ws8
-bindsym $mod+Shift+9 move container to workspace $ws9
-bindsym $mod+Shift+0 move container to workspace $ws10
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
 
+###################
+# Named Workspace
+# New named workspace
+bindsym $alt+w --release exec i3-input -F 'workspace %s' -P 'New workspace: '
+
+# Rename workspace
+# bindsym $mod+Shift+y exec i3-input -F 'rename workspace to "%s"' -P 'New name: '
+
+# Move window to named workspace
+bindsym $alt+Shift+w --release exec i3-input -F 'move container to workspace %s' -P 'Move to workspace: '
+                                                                            
+#####################
+# Workspace Actions
 # Workspace back and forth (with/without active container)
 workspace_auto_back_and_forth yes
 bindsym $mod+b workspace back_and_forth
@@ -177,79 +203,312 @@ bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_
 # Switch to workspace with urgent Window automatically
 for_window [urgent=latest] focus
 force_display_urgency_hint 500 ms
+for_window [class=Telegram|obs] focus
+
+# Navigate workspaces next/previous
+bindsym $mod+Ctrl+Right workspace next
+bindsym $mod+Ctrl+Left workspace prev
+
+# Navigate a container (window or group of windows) to the
+# workspace last visited by using the navigate back and forth above.
+bindsym $mod+mod1+Tab    move container to workspace back_and_forth; \
+                           workspace back_and_forth
+
+# Bindings to "mark" and "goto" mark specified with 1 character
+bindsym $mod+z    exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
+bindsym $mod+g    exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
+
+# Switch to any window with Rofi
+# ⇒ this simulates the familiar behavior of Alt+Tab on Windows, allowing you
+#   to find windows by typing.
+bindsym Mod1+Tab    exec "rofi -theme solarized -font $rofi-font \
+                      -show-icons -width 95 -show window"               
 
 ##############
-# Scratchpad #
-##############
+# Scratchpad
+# Modify // Move to Scratchpad // <><Shift> - minus
 # Make the currently focused window a scratchpad
 bindsym $mod+Shift+minus move scratchpad
 
-# Show the first scratchpad window
+# Modify // Show Scratchpad // <>< - minus>
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
 bindsym $mod+minus scratchpad show
+# Toggle sticky mode on current window
+bindsym $mod+Shift+s sticky toggle
 
-# Move window to scratchpad at i3 start-up
-for_window [title="^Notejot$"] move to scratchpad
+# Modify // Keepassxc Scratchpad Show // <><c>
+# Keepassxc scratchpad
+# for_window [class="KeePassXC" window_type="normal"] $scratch
+bindsym $mod1+k [class="KeePassXC"] scratchpad show
 
-########################
-# Control Key Mappings #
-########################
-# PulseAudio key bindings (need USE flag "pulseaudio", will pull in media-sound/pulseaudio automatically.)
-bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 10%+ unmute
-bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 10%- unmute
-bindsym XF86AudioMute exec amixer -D pulse sset Master toggle
+# Mousepad scratchpad
+bindsym $mod+m [class="Mousepad"] scratchpad show
 
-bindsym $mod+Ctrl+m exec pavucontrol
+# Thunar scratchpad
+bindsym $mod+t [class="Thunar"] scratchpad show
 
-# Reload the configuration file
+# Show the sup-mail scratchpad window, if any.
+bindsym mod1+m [title="^Sup ::"] scratchpad show
+
+#############################
+# Reload, Restart & Exit i3
+# reload the configuration file
 bindsym $mod+Shift+c reload
-
-# Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+# Session // Restart i3 // <><Shift> r
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 
-# Exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
-#####################
-# Screen Brightness #
-#####################
-	# increase screen brightness
-bindsym XF86MonBrightnessUp exec "light -A 5"
+############
+# Aesthetics
+# Colors #
+# Theme colors
+# Window color settings
+# Centaur
+# class                 border  backgr. text    indicator child_border
+client.focused          #ffffff #ffffff #1a1826 #ffffff   #ffffff
+client.focused_inactive #909090 #909090 #ffffff #909090   #909090
+client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+client.urgent           #cc241d #900000 #ffffff #cc241d   #cc241d
+client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 
-	# decrease screen brightness
-bindsym XF86MonBrightnessDown exec "light -U 5"
+client.background       #000000
 
-#######################################################
-# Set Power (shut down, restart and locking features) #
-#######################################################
-set $Locker i3lock && sleep 1
-set $mode_system System  (l) lock,  (e) logout,  (s) suspend, (h) hibernate,  (r) reboot,  (Shift+s) shutdown
+#########
+# i3bar #
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+	i3bar_command i3bar --transparency
+        status_command i3status
+	font pango:Roboto 10, Awesome 10
+	strip_workspace_numbers no
+	workspace_buttons yes
+    	mode dock
+        position bottom
+	i3bar_command i3bar 
+	output primary
+	separator_symbol :|:
+	
+colors {
+        background #00000000
+	statusline #FFFFFF
+      	separator   #666666
+      	
+           focused_workspace  #4c7899 #285577    #ffffff
+           active_workspace   #0d1017 #0d1017    #5e81ac
+           inactive_workspace #0d1017 #0d1017    #4c566a
+           urgent_workspace   #0d1017 #0d1017    #ee829f
+           binding_mode       #0d1017 #e6b673    #0d1017
+    }
+           
+       # Using custom i3status.conf
+        status_command i3status -c /etc/i3status.conf
+}
+
+# Toggle between dock mode and hide mode
+bindsym $mod+n bar mode toggle
+
+##########################
+# Other Window Functions
+# You can also use any non-zero value if you'd like to have a border
+for_window [class=".*"] border pixel 0
+
+# Popup during fullscreen mode
+# popup_during_fullscreen smart|ignore|leave_fullscreen
+popup_during_fullscreen smart
+
+# Floating window specification
+floating_minimum_size 75 x 50
+floating_maximum_size 1200 x 900
+#0a75ad
+# Set position of floating window
+for_window [class=".*"] move position center
+# move focused floating window to the center of all outputs
+
+# Move focused floating window to output centre
+bindsym $mod+Shift+h move absolute position center
+
+# move focused floating window to the current position of the cursor
+bindsym $mod+Shift+m move position mouse
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# Session // Exit & Terminate App // <><Shift> q
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# Window title align
+title_align center
+
+# Show window marks
+# show_marks yes|no
+show_marks yes
+
+# Window title icon
+# enable window icons for all windows
+for_window [all] title_window_icon on
+
+###################
+# Application Focus
+focus_on_window_activation smart
+
+#################################################
+# Applications & Directives / Program Assignation
+# Open applications on specific workspaces
+assign [class="^Vivaldi"] → $ws1
+assign [class="^qutebrowser"] → $ws1
+assign [class="^Mousepad"] → $ws2
+assign [class="^Thunar"] → $ws2
+assign [class="^easyeffects"] → $ws3
+assign [class="obs"] → $ws4
+assign [class="^Parole"] → $ws4
+assign [class="^Gimp" instance="gimp"] → $ws4
+assign [class="^Ristretto"] → $ws4
+# assign [class="Pinta"] $ws4
+# assign [class="Rawtherapee"] $ws4
+assign [class="^Xfce4-terminal"] → $ws5
+assign [class="^Tor Browser"] → $ws6
+assign [class="^Clamtk"] → $ws6
+assign [class="^BleachBit"] → $ws6
+assign [class="^Claws-mail"] → $ws7
+assign [class="^Audacious"] → $ws8
+assign [class="^Joplin" instance="joplin"] → $ws9
+assign [class="^Lifeograph"] $ws9
+assign [class="^(?i)libreoffice.*"] → $ws9
+assign [class="^Atril"] → $ws9
+assign [class="^Telegram"] → $ws10
+# assign [class="Skype"] $ws10
+assign [class="^Hexchat"] → $ws10
+# assign [class="nheko"] $ws10
+
+#########################################################
+# Open Specific Applications & Pop-ups in Floating Mode
+# by ROLE (WM_WINDOW_ROLE)
+# Note: window_role is useful for effecting child windows - such
+#       as instant messaging converstations, email composition
+#       windows, etc.
+# Tip: To find out what these values might be run:
+#       xprop | grep -i 'role'#
+for_window [window_role="(?i)pop-up"] floating enable
+for_window [window_role=".*Setting.*|.*Preference.*"] floating enable border normal
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="About"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="GtkFileChooserDialog"] resize set 800 x 600
+for_window [window_role="GtkFileChooserDialog"] move position center
+for_window [window_role="Msgcompose"] floating enable border normal; move position center
+for_window [window_type="menu"] floating enable
+for_window [window_type="Dialog"] floating enable
+
+# by APPLICATION (WM_CLASS)
+# Note: class is useful for applying custom settings to entire
+#       applications - including child windows. If this
+#       isn't want you want, then see the ROLE section above.
+# Tip: To find out these values, run:
+#       xprop | grep -i 'class'
+#       xprop | egrep -i 'class|name|title|role|pop'
+for_window [class="Xfce4-terminal"] floating enable
+for_window [class="Arandr"] floating enable
+for_window [class="Notes"] floating enable border normal
+for_window [class="GParted"] floating enable border normal
+for_window [class="Lightdm-gtk-greeter-settings"] floating enable
+for_window [class="Lightdm-settings"] floating enable
+for_window [class="Nitrogen"] floating enable sticky enable border normal
+for_window [class="Mousepad"] floating enable; move position center
+# for_window [class="Pavucontrol"] floating enable
+for_window [class="qt5ct"] floating enable sticky enable border normal
+for_window [class="Simple-scan"] floating enable border normal
+for_window [class="(?i)System-config-printer.py"] floating enable border normal
+for_window [class="BleachBit"] floating enable sticky border normal
+for_window [class="KeePassXC"] floating enable; move position center
+# for_window [class="Catfish"] floating enable
+for_window [class="Cheese"] floating enable sticky border normal
+for_window [class="Clamtk"] floating enable
+for_window [class="Xfce4-dict"] floating enable; move position center
+# for_window [class="Lxappearance"] floating enable sticky border normal
+for_window [class="Gnome-sound-recorder"] floating enable
+for_window [class="Xarchiver"] floating enable
+# for_window [class="Protonvpn"] floating enable
+
+# by TITLE
+# for_window [title="MPV"] floating enable
+# for_window [title="mpv"] floating enable
+for_window [title="glances"] floating enable
+for_window [title="File Transfer*"] floating enable
+for_window [title="(?i)(?:copying|deleting|moving)"] floating enable
+for_window [title="Preferences$"] floating enable
+for_window [title="i3_help"] floating enable sticky enable border normal
+
+############################################
+# Open Specific Applications In Focus Mode
+# for_window [class=".*"] title_format "%title"
+for_window [class="^Vivaldi$"] focus
+
+#################################################
+# Open Specific Applications in Fullscreen Mode
+for_window [class="^libreoffice-writer"] fullscreen
+
+# Tabbed
+for_window [class="Vivaldi"] layout tabbed
+for_window [class="qutebrowser"] layout tabbed
+# for_window [class="Telegram"] layout tabbed
+# for_window [class="Hexchat"] layout tabbed
+for_window [class="discord"] layout tabbed
+
+################################
+# On-demand Application Launch
+bindsym $mod+Ctrl+h exec --no-startup-id hexchat
+bindsym $mod+Ctrl+e exec --no-startup-id telegram-desktop
+bindsym $mod+Ctrl+g exec --no-startup-id galculator
+bindsym $mod+Ctrl+b exec --no-startup-id bleachbit
+bindsym $mod+Ctrl+l exec --no-startup-id libreoffice
+bindsym $mod+Ctrl+p exec --no-startup-id xfce4-terminal
+bindsym $mod+Ctrl+m exec --no-startup-id mousepad
+bindsym $mod+Ctrl+r exec --no-startup-id atril
+bindsym $mod+Ctrl+o exec --no-startup-id obs
+bindsym $mod+Ctrl+c exec --no-startup-id clamtk
+bindsym $mod+Ctrl+i exec --no-startup-id lifeograph
+bindsym $mod+Ctrl+x exec --no-startup-id lxappearance
+bindsym $mod+Ctrl+n exec --no-startup-id nitrogen
+bindsym $mod+Ctrl+a exec --no-startup-id xarchiver
+bindsym $mod+Ctrl+j exec --no-startup-id ~/.joplin/Joplin.AppImage
+bindsym $alt+p exec --no-startup-id pulseeffects
+bindsym $alt+v exec --no-startup-id vivaldi
+bindsym $Ctrl+Shift+n exec vivaldi --private-window
+bindsym $alt+t exec --no-startup-id torbrowser-launcher
+bindsym $mod+Ctrl+s exec xfce4-screenshooter
+
+#########
+# Modes
+# Set Power Function (shut down, restart and locking features) #
+# Key combinations for shutdown, reboot and screenlock can be added to ~/.config/i3/config.
+# The following assumes that polkit is installed to allow unprivileged users to run 
+# power management commands.
+set $Locker i3lock -c 000000 && sleep 1
+set $mode_system SYSTEM  (l) lock,  (e) logout,  (s) suspend,  (h) hibernate,  (r) reboot,  (Shift+s) shutdown
 mode "$mode_system" {
-    bindsym l exec --no-startup-id i3exit lock, mode "default"
-    bindsym e exec --no-startup-id i3exit logout, mode "default
-    bindsym s exec --no-startup-id i3exit suspend, mode "default"
-    bindsym h exec --no-startup-id i3exit hibernate, mode "default"
-    bindsym r exec --no-startup-id i3exit reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
+    bindsym l exec --no-startup-id $Locker, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
+    bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
 
-    # Back to normal: Enter or Escape
+    # back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
 
-exec --no-startup-id xautolock -time 5 -locker "i3lock -i ~/usr/bin/share/backgrounds/blackhat-hacker-CT.png" -corners +000-
+bindsym $mod+Pause mode "$mode_system"
 
-###################
-# Network Restart #
-###################
-set $netrefresh --no-startup-id sudo -A systemctl restart NetworkManager
-
-########################
-# Window Configuration #
-########################
-# Resize window (you can also use the mouse for that)
-set $mode_resize   Resize
-bindsym $mod+r mode "$mode_resize"
-mode "$mode_resize" {
+# Resize window (you can also use the mouse for window resize)
+set $mode_resize  resize
+mode " resize" {
         # These bindings trigger as soon as you enter the resize mode
 
         # Pressing left will shrink the window’s width.
@@ -273,191 +532,182 @@ mode "$mode_resize" {
         bindsym $mod+r mode "default"
 }
 
-# Drawing marks on window decoration
-show_marks yes
+bindsym $mod+r mode " resize"
 
-# Window title alignment
-title_align center
+###############################
+# Special Binding Mode Launch #
+# Press $mod+o followed by either a, s, m, Escape or Return to launch gnome-sound-recorder,
+# gnome-mahjonng, or return to the default mode.
+set $mode_launcher Launch: [a]atril [b]btop [c]catfish [d]dictionary [f]xfce4-appfinder [s]gnome-sound-recorder [m]gnome-mahjonng 
+bindsym $mod+o mode "$mode_launcher"
 
-# give the focused window a prefix
-bindsym $mod+p title_format "Important | %title"
-
-# print all window titles bold
-for_window [class=".*"] title_format "<b>%title</b>"
-
-# Print window titles of firefox windows red
-for_window [class="(?i)firefox"] title_format "<span foreground='red'>%title</span>"
-
-# Popup during fullscreen mode
-popup_during_fullscreen smart
-
-# Floating window specification
-floating_minimum_size 75 x 50
-floating_maximum_size 800 x 600
-# floating_maximum_size -1 x -1
-
-#########
-# i3bar #
-#########
-# Start i3bar to display a workspace bar (plus the system information i3status finds out, if available)
-bar {
-    status_command i3status
-    separator_symbol ":|:"
-    workspace_buttons yes
-    font pango:DejaVu Sans Mono 9, Awesome 8
-    i3bar_command i3bar --transparency
- colors {
-        background #00000000 # transparent
-        statusline #FEFEFA # baby powder
-        separator #F5F5F5 # dark grey
-
-	# Type             border  background font
-        focused_workspace  #4c7899 #285577    #ffffff
-        active_workspace   #333333 #5f676a    #ffffff
-        inactive_workspace #333333 #222222    #888888
-        urgent_workspace   #2f343a #900000    #ffffff
-    }
-        # Using custom i3status.conf
-        status_command i3status -c /etc/i3status.conf
+mode "$mode_launcher" {
+    bindsym a exec atril
+    bindsym b exec xfce4-terminal -e btop
+    bindsym c exec catfish
+    bindsym d exec xfce4-dict
+    bindsym f exec xfce4-appfinder
+    bindsym s exec gnome-sound-recorder
+    bindsym m exec gnome-mahjongg
+    
+    bindsym Escape mode "default"
+    bindsym Return mode "default"
 }
 
-##########################
-# Application Management #
-##########################
-# Open applications on specific workspaces
-assign [class="Thunderbird" instance="Mail"] $ws1
-assign [class="firefox" instance="Navigator"] $ws1
-assign [class="rssguard"] $ws1
-assign [class="gnome-weather"] $ws1
-assign [class="libreoffice"] $ws2
-assign [class="Xed"] $ws2
-assign [class="Xreader"] $ws2
-assign [class="Nautilus"] $ws2
-assign [class="Xfburn"] $ws2
-assign [class="vlc"] $ws4
-assign [class="mpv" instance="gl"] $ws4
-assign [class="plex"] $ws4
-assign [class="Celluloid"] $ws4
-assign [class="Shutter"] $ws4
-assign [class="Gimp" instance="gimp"] $ws4
-assign [class="Pinta"] $ws4
-assign [class="Rawtherapee"] $ws4
-assign [class="Tilix"] $ws5
-assign [class="Seahorse"] $ws6
-assign [class="Clamtk"] $ws6
-assign [class="Bleachbit"] $ws6
-assign [class="Gnome-mahjongg"] $ws7
-assign [class="Pysol"] $ws7
-assign [class="Stellarium"] $sw8
-assign [class="Joplin" instance="joplin"] $ws9
-assign [class="Lifeograph"] $ws9
-assign [class="Telegram"] $ws10
-assign [class="icq"] $ws10
-assign [class="Skype"] $ws10
-assign [class="Hexchat"] $ws10
+#######
+# Mouse
+# Focus follows mouse
+focus_follows_mouse yes
 
-###############################################
-# Open Specific Applications in Floating Mode #
-###############################################
-for_window [window_role="(?i)pop-up"] floating enable
-for_window [window_role=".*Setting.*|.*Preference.*"] floating enable border normal
-for_window [window_role="task_dialog"] floating enable
-for_window [class="Thunderbird" instance="Msgcompose"] floating enable border normal
-for_window [title="File Transfer*"] floating enable
-for_window [title="Preferences$"] floating enable
-for_window [class="Notejot"] floating enable border normal
-for_window [class="GParted"] floating enable border normal
-for_window [title="i3_help"] floating enable sticky enable border normal
-for_window [class="Lightdm-gtk-greeter-settings"] floating enable
-for_window [class="Lightdm-settings"] floating enable
-for_window [class="Lxappearance"] floating enable sticky enable border normal
-for_window [class="Pavucontrol"] floating enable
-for_window [class="qt5ct"] floating enable sticky enable border normal
-for_window [class="Qtconfig-qt4"] floating enable sticky enable border normal
-for_window [class="Simple-scan"] floating enable border normal
-for_window [class="(?i)System-config-printer.py"] floating enable border normal
-for_window [class="(?i)virtualbox"] floating enable border normal
-for_window [class="(?i)virtualbox"] fullscreen enable
-for_window [class="Xfburn"] floating enable
-for_window [class="Bleachbit"] floating enable border normal
-for_window [class="(?i)mpv"] floating enable
-for_window [class="KeePassXC"] floating enable
+# Mouse warp
+# mouse_warping output|none
+mouse_warping none
 
-############################
-# Icon on Window Title Bar #
-############################
-for_window [class="(?i)firefox"] title_format "<tt></tt><span foreground='#FF6611'>  </span><tt> </tt>%title"
-for_window [class="(?i)thunderbird"] title_format "<tt></tt><span foreground='#FF6611'>  </span><tt> </tt>%title"
-for_window [class="(?i)torbrowser"] title_format "<tt></tt><span foreground='#FF6611'>  </span><tt> </tt>%title"
-for_window [class="(?i)telegram"] title_format "<tt></tt><span foreground='#FF6611'>  </span><tt> </tt>%title"
-for_window [class="(?i)hexchat"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
-for_window [class="(?i)skype"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
-for_window [class="(?i)icq-im.icq"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
-for_window [class="(?i)orion"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
-for_window [class="(?i)dropbox"] title_format "<tt></tt><span foreground='#FF6611'>  </span><tt> </tt>%title"
-for_window [class="(?i)gimp"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
-for_window [class="(?i)rawtherapee"] title_format "<tt></tt><span foreground='#FF6611'>  </span><tt> </tt>%title"
-for_window [class="(?i)pinta"] title_format "<tt></tt><span foreground='#FF6611'>  </span><tt> </tt>%title"
-for_window [class="(?i)tilix"] title_format "<tt></tt><span foreground='#FF6611'>  </span><tt> </tt>%title"
-for_window [class="(?i)seahorse"] title_format "<tt></tt><span foreground='#FF6611'>  </span><tt> </tt>%title"
-for_window [class="(?i)nautilus"] title_format "<tt></tt><span foreground='#FF6611'>  </span><tt> </tt>%title"
-for_window [class="(?i)xed"] title_format "<tt></tt><span foreground='#FF6611'>   </span><tt> </tt>%title"
-for_window [class="(?i)com.github.lainsce.notejot"] title_format "<tt></tt><span foreground='#FF6611'>  </span><tt> <tt>%title"
-for_window [class="(?i)libreoffice"] title_format "<tt></tt><span foreground='#FF6611'>  </span><tt> </tt>%title"
-for_window [class="(?i)gnome-mahjongg"] title_format "<tt></tt><span foreground='#FF6611'>  </span><tt> </tt>%title"
-for_window [class="(?i)steam"] title_format "<tt></tt><span foreground='#FF6611'>  </span><tt> </tt>%title"
-for_window [title="Virtual Machine Manager"] title_format "<tt></tt><span foreground='#AAAAFF' >  </span><tt> </tt>%title"
-for_window [class="(?i)teamviewer"] title_format "<tt></tt><span foreground='#FF6611'>  </span><tt> </tt>%title"
-for_window [class="(?i)xreader"] title_format "<tt></tt><span foreground='#FF6611'>  </span><tt> </tt>%title"
-for_window [class="(?i)qalculate-gtk"] title_format "<tt></tt><span foreground='#FF6611'>  </span><tt> </tt>%title"
-for_window [class="(?i)RSS Guard"] title_format "<tt></tt><span foreground='#FF6611'>  </span><tt> </tt>%title"
-for_window [class="(?i)ClamTK"] title_format "<tt></tt><span foreground='#FF6611'>  </span><tt> </tt>%title"
+######################
+# Gap Settings
+# Set inner/outer gaps
+gaps inner 14
+gaps outer 14
 
-#########################
-# Start-up Applications #
-#########################
-# Pulseaudio
-exec_always --no-startup-id pulseaudio --start
-exec --no-startup-id pulseaudio --kill
-exec --no-startup-id pulseaudio --start
+# Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
+# gaps inner|outer current|all set|plus|minus <px>
+# gaps inner all set 10
+# gaps outer all plus 5
 
-# nm-applet: Network management applet in systray
-exec --no-startup-id nm-applet &
+# Smart gaps (gaps used if only more than one container on the workspace)
+smart_gaps on
+
+# Smart borders (draw borders around container only if it is not the only container on this workspace) 
+# on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the edge of the screen is 0)
+smart_borders on
+
+# Press $mod+Shift+g to enter the gap mode. Choose o or i for modifying outer/inner gaps. Press one of + / - (in-/decrement for current workspace) or 0 (remove gaps for current workspace). If you also press Shift with these keys, the change will be global for all workspaces.
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+bindsym $mod+Shift+g mode "$mode_gaps"
+
+mode "$mode_gaps" {
+        bindsym o      mode "$mode_gaps_outer"
+        bindsym i      mode "$mode_gaps_inner"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_inner" {
+        bindsym plus  gaps inner current plus 5
+        bindsym minus gaps inner current minus 5
+        bindsym 0     gaps inner current set 0
+
+        bindsym Shift+plus  gaps inner all plus 5
+        bindsym Shift+minus gaps inner all minus 5
+        bindsym Shift+0     gaps inner all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_outer" {
+        bindsym plus  gaps outer current plus 5
+        bindsym minus gaps outer current minus 5
+        bindsym 0     gaps outer current set 0
+
+        bindsym Shift+plus  gaps outer all plus 5
+        bindsym Shift+minus gaps outer all minus 5
+        bindsym Shift+0     gaps outer all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+#############################################
+# Load Applications at Start-up (Autostart)
+#Authentication dialog (polkit)
+exec_akways --no-startup-id xfce-polkit &
 
 # Nitrogen: Wallpaper setter
-exec --no-startup-id nitrogen --restore
+# exec_always --no-startup-id nitrogen --restore; sleep 1; picom -b &
+exec_always --no-startup-id nitrogen --restore
 
-# blueman-applet: Bluetooth management applet in systray
-exec --no-startup-id blueman-applet &
+# Picom window compositor
+# exec --no-startup-id picom -b --detect-rounded-corners
+exec --no-startup-id killall picom; picom -cCGb --config ~/.config/picom/picom.conf
 
-# picom: Compositor
-exec_always --no-startup-id picom --config ~/etc/xdg/picom.conf
-
-# mpd: Music player daemon
-exec --no-startup-id mpd
-
-# Volumeicon: Lightweight volume control applet in systray
+# *** Tray Applications ***
+# Volumeicon: Change volume and other sound settings
+# exec --no-startup-id volumeicon -d hw:1 &
+# exec --no-startup-id volumeicon -d hw:0 &
 exec --no-startup-id volumeicon
 
-# Redshift GTK: GTK integration for Redshift
-exec --no-startup-id redshift-gtk &
+# Keyring
+exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=ssh,secrets,pkcs11
 
-# hp-systray: HP systray applet in systray
-exec --no-startup-id hp-systray &
+# Blueman-applet: Bluetooth management applet in systray
+exec_always --no-startup-id blueman-applet
 
-# dropbox: Dropbox Start daemon
-exec --no-startup-id dropbox start
+# Clipboard manager
+exec_always --no-startup-id xfce4-clipman
+
+# Notes: Quick notes
+exec_always --no-startup-id xfce4-notes
 
 # keepassxc: Cross-platform password manager applet in systray
 exec --no-startup-id keepassxc
 
-# xkill
-bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
-
-# Radiotray-ng in systray
+# Radiotray-ng in systray: Online radio application
 exec --no-startup-id radiotray-ng
 
-# firewalld GUI
-exec --no-startup-id firewall-applet &
+# HP Systray: HP printer system tray
+exec --no-startup-id hp-systray
 
-######### END #########
+# Redshift-gtk
+# exec --no-startup-id redshift-gtk
+
+# Power manager
+exec --no-startup-id xfce4-power-manager
+
+# Dropbox
+exec –no-startup-id dropbox start
+
+# ibus daemon
+exec --no-startup-id ibus-daemon
+
+# Firejail: Sandboxing
+exec --no-startup-id firejail
+
+# Typing completion input
+exec --no-startup-id ibus-typing-booster
+
+# Policy Kit
+exec --no-startup-id /usr/libexec/xfce-polkit &
+
+##############
+# Xresources
+# The ~/.Xresources should contain a line such as
+#     *color0: #121212
+# and must be loaded properly, e.g., by using
+#     xrdb ~/.Xresources
+# This value is picked up on by other applications (e.g., the URxvt terminal
+# emulator) and can be used in i3 like this:
+set_from_resource $black i3wm.color0 #000000
+
+###################
+# Displays Script
+exec_always --no-startup-id ~/.screenlayout/dual-screens.sh
+
+############################################
+# Dual Screen Workplace Specific Placement #
+workspace "1" output HDMI-1-2
+Workspace "2" output HDMI-1-2
+workspace "3" output HDMI-1-2
+workspace "4" output HDMI-1-2
+workspace "5" output HDMI-1-2
+workspace "6" output HDMI-1-2
+workspace "7" output HDMI-1-2
+workspace "8" output HDMI-1-2
+workspace "9" output HDMI-1-2
+workspace "10" output HDMI-1-2
+
+# Move Workspace to specific output
+bindsym $mod+F3 move workspace to output HDMI-1-1
+bindsym $mod+F2 move workspace to output LVDS-1
+
+######### END FILE #########
